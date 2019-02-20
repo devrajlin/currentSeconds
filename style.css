@@ -1,0 +1,18 @@
+body{
+	background-color: #f7f8fb;
+}
+
+.card-body{
+	background-color: #f7f8fb;
+}
+
+textarea
+{
+  width:100%;
+  
+}
+
+.mdc-text-field {
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}

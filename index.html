@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"> 
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css
+">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div style="margin-top: 30px;" class="col-md-12">
+				<!-- <h3 class="card-heading text-center">Current Seconds</h3> -->
+				<div class="row">
+					<div class="col-md-3">
+					<div class="border border-dark card card-body">
+						<div class="bg-primary text-center text-white card-body">
+							<h3 class="mdc-typography--subtitle2">UTC Date</h3>
+							<h3 class="mdc-typography--subtitle2" id="today"></h3>
+						</div>
+						<hr>
+						<div class="bg-primary text-center text-white card-body">
+							<h3 class="mdc-typography--subtitle2">UTC Time</h3>
+							<h3 class="mdc-typography--subtitle2" id="time"></h3>
+						</div>
+						<hr>
+						<div class="bg-primary text-center text-white card-body">
+							<h3 class="mdc-typography--subtitle2">Unix Time</h3>
+							<h3 class="mdc-typography--subtitle2" id="Unixtime"></h3>
+						</div>
+						
+					</div>
+					</div>
+					<div class="col-md-6">
+					<div class="row">
+						<div class=" card-body">
+							<h1 class="mdc-typography mdc-typography--headline4 demo-headline">Current <img class="img-responsive" src="css/clock.png" width="50" height="50"> Seconds</h1>
+								<div class="text-field-container">
+									<div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--no-label mdc-text-field--textarea">
+										<textarea style="font-size: 30px;" id="UTCsec" class="mdc-text-field__input"></textarea>
+											<div class="mdc-notched-outline mdc-notched-outline--upgraded">
+												<div class="mdc-notched-outline__leading"></div>
+												<div class="mdc-notched-outline__notch" style=""></div>
+												<div class="mdc-notched-outline__trailing"></div>
+											</div>
+									</div>
+								</div>
+								<hr>
+							<div class="card card-body text-center border border-dark">
+								<h3 class="mdc-typography--subtitle2">Convert Seconds</h3>
+							<input type="text" id="seconds" class="mdc-text-field__input" aria-label="Text field aria label">
+							</div>
+							<br>
+							<div class="card card-body text-center border border-dark">
+							<h3 class="mdc-typography--subtitle2">To Local Time and Date</h3>
+							<p id="toDate"></p>
+							</div>
+						</div>
+							
+					</div>
+					</div>
+					<div class="col-md-3">
+						<div class="border border-dark card card-body">
+							<div class="bg-primary text-center text-white card-body">
+								<h3 class="mdc-typography--subtitle2">Local Date</h3>
+								<h3 class="mdc-typography--subtitle2" id="localDate"></h3>
+							</div>
+							<hr>
+							<div class="bg-primary text-center text-white card-body">
+								<h3 class="mdc-typography--subtitle2">Local Time</h3>
+								<h3 class="mdc-typography--subtitle2" id="localTime"></h3>
+							</div>
+							<hr>
+							<div class="bg-primary text-center text-white card-body">
+								<h3 class="mdc-typography--subtitle2">Local timezone(UTC+5.5h)</h3>
+								<b>Indian Standard</b>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+function startTime(){
+		var today = new Date(); //today date
+		var utc = today.toUTCString(); //today UTC Date
+		var hours = today.getUTCHours(); // UTC Hours
+		var minutes = today.getUTCMinutes(); //UTC Minutes
+		var seconds = today.getUTCSeconds(); 
+		var UTCseconds = (today.getTime() + today.getTimezoneOffset()*60*1000)/1000; //UTC Seconds
+		var timeStampInS = window.performance && window.performance.now && window.performance.timing && window.performance.timing.navigationStart ? window.performance.now() + window.performance.timing.navigationStart : Date.now(); //unix time
+
+//Running clock on page
+		var localTime = today.getTime();
+			t = setTimeout(function() {
+			    startTime()
+			  }, 500);
+
+// Results on web page
+			  document.getElementById("today").innerHTML = utc;
+			  document.getElementById("localDate").innerHTML = today;
+			  document.getElementById("time").innerHTML = hours+':'+ minutes+':'+ seconds;
+			  document.getElementById('UTCsec').innerHTML = UTCseconds;
+			  document.getElementById('Unixtime').innerHTML = timeStampInS;
+			  document.getElementById('localTime').innerHTML = today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+			  // document.getElementById("today").innerHTML = utc;
+}
+startTime(); //function calling
+
+//converting seconds to Local time and date.
+$("#seconds").on('input', function() {
+	// var secs = $('input').focus();
+	 var t = new Date(1970, 0, 1); // Epoch
+    t.setSeconds(this.value);
+    console.log(t);
+	$("#toDate").html(t);
+	$('input').focus();
+	return t;
+ });
+
+</script>
+</body>
+</html>
