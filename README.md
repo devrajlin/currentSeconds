@@ -4,3 +4,5 @@ Please follow below steps:
   `1.Unzip InternTask-Devraj.zip and open index.html page in any browser`
   `2.For responsive experience open it in firefox and press Ctrl+Shift+M`
   `3.Thank you`
+![alt text](https://raw.githubusercontent.com/devrajlin/currentSeconds/master/Screenshot from 2019-02-20 11-32-57.png
+)
